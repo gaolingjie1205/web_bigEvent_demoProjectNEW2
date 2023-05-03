@@ -2,14 +2,23 @@
 // 比如把开发者指定的"配置对象"提供给其它AJAX方法
 // 这个"配置对象"也会获取到$.get()、$.post()、$.ajax()等方法里面的options对象，并可以直接读取出来
 // import "../lib/jquery";
-$.ajaxPrefilter(function(options) {
+$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
   // 在login.js里面只给出接口的请求路径，需要在这里拼接上请求根路径才完整
   options.url = "http://www.liulongbin.top:3007" + options.url;
 
-  /*
+  
   // 统一为有权限的接口添加Authorization请求头
   if(options.url.indexOf("/my/") !== -1) {
-    options.headers.Authorization = localStorage.getItem("token");
+    // options.headers 默认是undefined，不能像下面这样直接当作一个对象来添加属性
+    // options.headers.Authorization = localStorage.getItem("token");
+
+    // 以下写法不会重写所有HTTP请求头，放心使用
+    // options.headers = {
+    //   Authorization: localStorage.getItem("token")
+    // };
+
+    // 从AI那里学到的方法，直接利用jQuery给的jqXHR来设置HTTP请求头
+    jqXHR.setRequestHeader("Authorization", localStorage.getItem("token"));
   }
   
 
@@ -22,7 +31,7 @@ $.ajaxPrefilter(function(options) {
       location.href = "./login.html";
     }
   }
-  */
+
 });
 
 
