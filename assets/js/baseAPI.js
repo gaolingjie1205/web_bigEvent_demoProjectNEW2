@@ -21,7 +21,7 @@ $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
     jqXHR.setRequestHeader("Authorization", localStorage.getItem("token"));
   }
   
-
+  /*
   // 统一配置complete回调函数
   options.complete = function(resObj) {
     // resObj["responseJSON"]就是服务器返回的JSON对象
@@ -31,7 +31,7 @@ $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
       location.href = "./login.html";
     }
   }
-
+  */
 });
 
 

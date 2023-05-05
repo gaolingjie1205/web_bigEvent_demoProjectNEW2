@@ -1,7 +1,7 @@
 // import "../lib/jquery";
 
 // 0、先检查用户是否登录，判断依据就是服务器返回的JSON的status值，若为0则已登录，若为1则是非法访问index.html
-$(window).on("pageshow", function() {
+function getUserInfoPre() {
   $.ajax({
     type: "GET",
     url: "/my/userinfo",
@@ -18,13 +18,8 @@ $(window).on("pageshow", function() {
           email: data["data"]["email"],
           user_pic: data["data"]["user_pic"]
         };
-        let intervalID = setInterval(function() {
-          if(window.DOMContentLoadedFlag === true) {
-            clearInterval(intervalID);
-            console.log("将要初始化主页功能了");
-            initializeIndex();
-          }
-        }, 50);
+        console.log("检查用户令牌资格完毕，将要初始化主页功能了");
+        initializeIndex();
       }
       else {
         localStorage.removeItem("token");
@@ -38,11 +33,13 @@ $(window).on("pageshow", function() {
       location.href = "./login.html";
     }
   });
-});
-$(document).on("DOMContentLoaded", function() {
-  window.DOMContentLoadedFlag = true;
-});
+}
+$(document).on("DOMContentLoaded", getUserInfoPre);
 
+
+/**
+ * 初始化主页功能
+ */
 function initializeIndex() {
   let layuiLayer = layui.layer;  // layui的弹出层组件
 
@@ -85,7 +82,7 @@ function initializeIndex() {
   });
 
 
-  // 3、获取当前登录用户的基本信息
+  // 3、获取当前登录用户的基本信息、渲染用户的头像或文字头像
   getUserInfo();
 
 
@@ -101,14 +98,60 @@ function initializeIndex() {
       location.href = "./login.html";
     });
   });
+
+
+  // 5、测试从子框架向父框架发送消息
+  window.addEventListener("message", function(e) {
+    console.log(e.data);
+    console.log("消息来源： ", e.origin);
+  });
 };
+
 
 /** 
  * 获取当前登录用户的基本信息
  */
 function getUserInfo() {
-  let layuiLayer = layui.layer;  // layui的弹出层组件
+  $.ajax({
+    type: "GET",
+    url: "/my/userinfo",
+    // headers将在$.ajaxPrefilter()里给出
+    async: false,
+    success: function(data, textStatus, jqXHR) {
+      console.log(data);
+      if(data["status"] === 0) {
+        // 成功后，就可以将拿到的个人信息渲染进index.html了
+        window.userInfo = {
+          username: data["data"]["username"],
+          nickname: data["data"]["nickname"],
+          name: data["data"]["nickname"] || data["data"]["username"],
+          email: data["data"]["email"],
+          user_pic: data["data"]["user_pic"]
+        };
+        console.log("获取当前登录用户的基本信息完毕");
+      }
+      else {
+        localStorage.removeItem("token");
+        location.href = "./login.html";
+      }
+    },
+    error: function(jqXHR, textStatus, exception) {
+      console.log(textStatus);
+      console.log(exception);
+      localStorage.removeItem("token");
+      location.href = "./login.html";
+    }
+  });
+  renderUserImgOrTextAvator();
+}
+
+
+/**
+ * 渲染用户的头像或文字头像
+ */
+function renderUserImgOrTextAvator() {
   if(window.userInfo.user_pic) {
+    $("img.header-nav-item-img").css("display", "inline-block");
     $("img.header-nav-item-img").attr("src", window.userInfo.user_pic);
     $("span.header-nav-item-img").css("display", "none");
   }

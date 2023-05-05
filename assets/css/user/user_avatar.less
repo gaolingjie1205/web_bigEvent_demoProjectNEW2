@@ -1,0 +1,101 @@
+@import "../base.less";
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body {
+  padding: 15px;
+  background-color: #f2f3f5;
+}
+
+// 卡片面板
+.card {
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #fff;
+  font: 14px/1.5 'system-ui';
+
+  .card-header {
+    height: 36px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  .card-body {
+    width: 500px;
+  }
+}
+
+// 按钮样式
+.btn {
+  padding: 10px 15px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 14px;
+  transition: all 0.3s;
+
+  &:hover {
+    // filter: brightness(130%);
+    opacity: 0.8;
+  }
+  &.btn-submit {
+    background-color: rgb(58, 158, 246);
+    color: #fff;
+  }
+  &.btn-danger {
+    background-color: rgb(249, 84, 84);
+    color: #fff;
+  }
+}
+
+// cropper裁剪预览图片，为这一部分书写样式
+img {
+  max-width: 100%;
+}
+.row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+
+  // 图片裁剪区域
+  .cropper-box {
+    overflow: hidden;
+    width: 350px;
+    height: 350px;
+    background-color: cyan;
+  }
+  // 图片预览区域
+  .preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+
+    .preview-img {
+      overflow: hidden;
+      border-radius: 50%;
+      background-color: gray;
+
+      &.w100 {
+        width: 100px;
+        height: 100px;
+      }
+      &.w50 {
+        width: 50px;
+        height: 50px;
+      }
+    }
+    // 图片预览尺寸提示文字
+    .size {
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+  // 按钮区
+  #userAvatar {
+    display: none;
+  }
+}

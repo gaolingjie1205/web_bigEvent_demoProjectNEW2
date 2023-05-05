@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>修改基本资料</title>
+  <!-- 引入本页CSS -->
+  <link rel="stylesheet" href="../assets/css/user/user_info.css">
+  <!-- 引入layui.js，使用其表单验证组件、弹出层组件 -->
+  <script src="../assets/lib/layui/layui.all.js"></script>
+  <!-- 引入jQuery -->
+  <script src="../assets/lib/jquery.js"></script>
+  <!-- 引入baseAPI，为AJAX提供预处理函数 -->
+  <script src="../assets/js/baseAPI.js"></script>
+  <!-- 引入本页JS -->
+  <script src="../assets/js/user/user_info.js"></script>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">修改基本资料</div>
+    <div class="card-body">
+      <!-- lay-filter属性表示可以使用layui提供的方法快速给表单元素赋值，无需一个一个获取DOM然后改value -->
+      <form method="post" id="userinfoForm" lay-filter="userinfoForm" class="layui-form">
+        <!-- 隐藏的id输入框 -->
+        <input type="hidden" name="id" id="id" value="">
+        <div class="input-block">
+          <label for="username">登录名称</label>
+          <input type="text" id="username" name="username" placeholder="请输入登录名称" value="" readonly>
+        </div>
+        <div class="input-block">
+          <label for="nickname">用户昵称</label>
+          <input type="text" id="nickname" name="nickname" placeholder="请输入用户昵称" required lay-verify="required|nickname">
+        </div>
+        <div class="input-block">
+          <label for="email">用户邮箱</label>
+          <input type="email" id="email" name="email" placeholder="请输入用户邮箱" required lay-verify="required|email">
+        </div>
+        <div class="input-block">
+          <label for=""></label>
+          <button type="submit" class="btn btn-submit" id="btnSubmit" lay-submit lay-filter="">立即提交</button>
+          <button type="reset" class="btn" id="btnReset">重置</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

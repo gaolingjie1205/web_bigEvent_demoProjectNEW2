@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>修改头像</title>
+  <!-- 引入cropper插件CSS -->
+  <link rel="stylesheet" href="../assets/lib/cropper/cropper.css" />
+  <!-- 引入本页CSS -->
+  <link rel="stylesheet" href="../assets/css/user/user_avatar.css">
+  
+  <!-- 引入layui.js，使用其表单验证组件、弹出层组件 -->
+  <script src="../assets/lib/layui/layui.all.js"></script>
+  <!-- 引入jQuery -->
+  <script src="../assets/lib/jquery.js"></script>
+  <!-- 引入cropper插件 -->
+  <script src="../assets/lib/cropper/Cropper.js"></script>
+  <script src="../assets/lib/cropper/jquery-cropper.js"></script>
+  <!-- 引入baseAPI，为AJAX提供预处理函数 -->
+  <script src="../assets/js/baseAPI.js"></script>
+  <!-- 引入本页JS -->
+  <script src="../assets/js/user/user_avatar.js"></script>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">修改头像</div>
+    <div class="card-body">
+      <div class="row">
+        <!-- 图片裁剪区域 -->
+        <div class="cropper-box">
+          <!-- 这个 img 标签很重要，将来会把它初始化为裁剪区域 -->
+          <img id="image" src="../assets/images/sample.jpg" />
+        </div>
+        <!-- 图片预览区域 -->
+        <div class="preview">
+          <div>
+            <div class="preview-img w100"></div>
+            <p class="size">100 x 100</p>
+          </div>
+          <div>
+            <div class="preview-img w50"></div>
+            <p class="size">50 x 50</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- 隐藏的file选择框，被下面的按钮的点击事件所触发 -->
+        <input type="file" name="userAvatar" id="userAvatar" accept="image/jpg,image/jpeg,image/png">
+        <button type="button" class="btn btn-submit" id="btnUserAvatar">选择本地图片</button>
+        <button type="button" class="btn btn-danger" id="btnUserAvatarUpload">确定</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

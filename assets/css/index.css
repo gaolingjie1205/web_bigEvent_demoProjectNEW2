@@ -21,6 +21,7 @@ li {
 body {
   visibility: hidden;
   height: 0;
+  min-width: 1000px;
 }
 header.admin {
   user-select: none;
@@ -167,6 +168,7 @@ header.admin > .header > .header-nav > .header-nav-item > .header-nav-item-child
   left: 200px;
   right: 0;
   bottom: 44px;
+  min-width: 800px;
 }
 .body > iframe {
   width: 100%;
@@ -178,6 +180,7 @@ footer.footer {
   left: 0;
   right: 0;
   height: 44px;
+  min-width: 1000px;
   background-color: #eee;
   text-align: center;
   font: 12px/44px 'system-ui';

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>修改密码</title>
+  <!-- 引入本页CSS -->
+  <link rel="stylesheet" href="../assets/css/user/user_pwd.css">
+  <!-- 引入layui.js，使用其表单验证组件、弹出层组件 -->
+  <script src="../assets/lib/layui/layui.all.js"></script>
+  <!-- 引入jQuery -->
+  <script src="../assets/lib/jquery.js"></script>
+  <!-- 引入baseAPI，为AJAX提供预处理函数 -->
+  <script src="../assets/js/baseAPI.js"></script>
+  <!-- 引入本页JS -->
+  <script src="../assets/js/user/user_pwd.js"></script>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">修改密码</div>
+    <div class="card-body">
+      <!-- lay-filter属性表示可以使用layui提供的方法快速给表单元素赋值，无需一个一个获取DOM然后改value -->
+      <form method="post" id="userpwdForm" lay-filter="userpwdForm" class="layui-form">
+        <!-- 隐藏的id输入框 -->
+        <input type="hidden" name="id" id="id" value="">
+        <div class="input-block">
+          <label for="oldpwd">原密码</label>
+          <input type="password" id="oldpwd" name="" placeholder="请输入原密码" lay-verify="required|pwd">
+        </div>
+        <div class="input-block">
+          <label for="newpwd">新密码</label>
+          <input type="password" id="newpwd" name="" placeholder="请输入新密码" required lay-verify="required|pwd|newpwd">
+        </div>
+        <div class="input-block">
+          <label for="confirmNewpwd">确认新密码</label>
+          <input type="password" id="confirmNewpwd" name="" placeholder="再次确认新密码" required lay-verify="required|pwd|confirmNewpwd">
+        </div>
+        <div class="input-block">
+          <label for=""></label>
+          <button type="submit" class="btn btn-submit" id="btnSubmit" lay-submit lay-filter="">修改密码</button>
+          <button type="reset" class="btn" id="btnReset">重置</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
